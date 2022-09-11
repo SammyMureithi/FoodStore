@@ -1,25 +1,20 @@
-import React ,{Component } from 'react'
+import React ,{ useContext } from 'react'
+import { Context } from './Drinks'
+import Image from './Image';
 
-export class Drink extends Component {
-    constructor(props) {
-      super(props)
-    
-     
-    }
-  render() {
+function Drink() {
+  const { allDrinks } = React.useContext(Context)
+  const res = allDrinks.map( element => {
+    <Image key={element.id} {...element}/>
+  } )
     return (
-        <div className='drink'>
-        <img src={this.props.image} />
-        <div className='description'>
-        <h1>{this.props.title}</h1>
-        <p>{this.props.para}
-        </p>
-        </div>
-        
-  </div>
+      <>
+        <h1>DRINKS</h1>
+        {res}
+      </>
     )
   }
-}
+
 
 export default Drink
 

@@ -2,7 +2,8 @@ import React, { useEffect } from 'react'
 import { useState } from 'react'
 import Drink from './Drink';
 
-function Drinks() {
+const Context = React.createContext();
+function Drinks(props) {
     const [drinks, setDrinks] = useState([]);
     useEffect( () => {
         fetch( "https://www.thecocktaildb.com/api/json/v1/1/search.php?f=b" )
@@ -25,9 +26,12 @@ function Drinks() {
     })
   return (
       <div>
+          <Context.Provider value={{allDrinks: drinks}}>
+              {props.children}
+          </Context.Provider>
           {myDrinks}
     </div>
   )
 }
 
-export default Drinks
+export  {Drinks,Context}
